@@ -7,7 +7,7 @@ import "package:cron/cron.dart";
 
 import "../client/client.dart";
 
-import "update_cosmetics_cache.dart";
+// import "update_cosmetics_cache.dart";
 import "catalog_manager.dart";
 import "premium_role_sync.dart";
 import "claim_daily.dart";
@@ -15,7 +15,7 @@ import "free_llamas.dart";
 import "collect_research.dart";
 import "auto_research.dart";
 import "url_shortener.dart";
-import "topgg.dart";
+// import "topgg.dart";
 import "stw_missions.dart";
 
 /// Handles all the system jobs
@@ -26,10 +26,10 @@ class SystemJobsPlugin extends BasePlugin {
   late final Cron _cron;
 
   /// update cosmetics cache system job
-  late final UpdateCosmeticsCacheSystemJob updateCosmeticsCacheSystemJob;
+  // late final UpdateCosmeticsCacheSystemJob updateCosmeticsCacheSystemJob;
 
   /// update cosmetics cache system job
-  late final Timer _updateCosmeticsCacheSystemJobTimer;
+  // late final Timer _updateCosmeticsCacheSystemJobTimer;
 
   /// catalog manager system job
   late final CatalogManagerSystemJob catalogManagerSystemJob;
@@ -71,7 +71,7 @@ class SystemJobsPlugin extends BasePlugin {
   late final UrlShortenerSystemJob urlShortenerSystemJob;
 
   /// topgg system job
-  late final TopGGSystemJob topGGSystemJob;
+  // late final TopGGSystemJob topGGSystemJob;
 
   /// stw missions system job
   late final STWMissionsSystemJob stwMissionsSystemJob;
@@ -87,7 +87,7 @@ class SystemJobsPlugin extends BasePlugin {
   Future<void> onRegister(INyxx nyxx, Logger logger) async {
     _cron = Cron();
     logger.info("Registering update cosmetics cache system job");
-    updateCosmeticsCacheSystemJob = UpdateCosmeticsCacheSystemJob();
+    // updateCosmeticsCacheSystemJob = UpdateCosmeticsCacheSystemJob();
     logger.info("Registering catalog manager system job");
     catalogManagerSystemJob = CatalogManagerSystemJob();
     logger.info("Registering premium role sync system job");
@@ -103,7 +103,7 @@ class SystemJobsPlugin extends BasePlugin {
     logger.info("Registering url shortener system job");
     urlShortenerSystemJob = UrlShortenerSystemJob(_client);
     logger.info("Registering topgg system job");
-    topGGSystemJob = TopGGSystemJob(_client);
+    // topGGSystemJob = TopGGSystemJob(_client);
     logger.info("Registering stw missions system job");
     stwMissionsSystemJob = STWMissionsSystemJob(_client);
   }
@@ -112,14 +112,14 @@ class SystemJobsPlugin extends BasePlugin {
   @override
   void onBotStart(INyxx nyxx, Logger logger) async {
     try {
-      updateCosmeticsCacheSystemJob.run();
+      // updateCosmeticsCacheSystemJob.run();
 
-      logger.info(
-          "Scheduling update cosmetics cache system job to run every ${updateCosmeticsCacheSystemJob.runDuration.inHours} hours.");
-      _updateCosmeticsCacheSystemJobTimer =
-          Timer.periodic(updateCosmeticsCacheSystemJob.runDuration, (_) async {
-        await updateCosmeticsCacheSystemJob.run();
-      });
+      // logger.info(
+      //     "Scheduling update cosmetics cache system job to run every ${updateCosmeticsCacheSystemJob.runDuration.inHours} hours.");
+      // _updateCosmeticsCacheSystemJobTimer =
+      //     Timer.periodic(updateCosmeticsCacheSystemJob.runDuration, (_) async {
+      //   await updateCosmeticsCacheSystemJob.run();
+      // });
 
       catalogManagerSystemJob.run();
 
@@ -134,15 +134,15 @@ class SystemJobsPlugin extends BasePlugin {
         return;
       }
 
-      urlShortenerSystemJob.run();
-      topGGSystemJob.run();
+      // urlShortenerSystemJob.run();
+      // topGGSystemJob.run();
 
-      logger.info(
-          "Scheduling premium role sync system job to run every ${premiumRoleSyncSystemJob.runDuration.inHours} hours.");
-      _premiumRoleSyncSystemJobTimer =
-          Timer.periodic(premiumRoleSyncSystemJob.runDuration, (_) async {
-        await premiumRoleSyncSystemJob.run();
-      });
+      // logger.info(
+      //     "Scheduling premium role sync system job to run every ${premiumRoleSyncSystemJob.runDuration.inHours} hours.");
+      // _premiumRoleSyncSystemJobTimer =
+      //     Timer.periodic(premiumRoleSyncSystemJob.runDuration, (_) async {
+      //   await premiumRoleSyncSystemJob.run();
+      // });
 
       logger.info(
           "Scheduling claim daily system job to run every day at 0:00 UTC.");
@@ -195,8 +195,8 @@ class SystemJobsPlugin extends BasePlugin {
   @override
   Future<void> onBotStop(INyxx nyxx, Logger logger) async {
     try {
-      logger.info("Unscheduling update cosmetics cache system job.");
-      _updateCosmeticsCacheSystemJobTimer.cancel();
+      // logger.info("Unscheduling update cosmetics cache system job.");
+      // _updateCosmeticsCacheSystemJobTimer.cancel();
 
       logger.info("Unscheduling catalog manager system job.");
       _catalogManagerSystemJobTimer.cancel();

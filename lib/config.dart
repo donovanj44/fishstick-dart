@@ -7,10 +7,10 @@ class Config {
   bool get developmentMode => _developmentMode;
 
   /// guild id to register commands on while in development mode.
-  String get developmentGuild => "877595218948554752";
+  String get developmentGuild => "756720238631845967";
 
   /// the bot's owner id
-  String get ownerId => "727224012912197652";
+  String get ownerId => "203306017566490625";
 
   /// the bot's telegram owner id
   String get telegramOwnerId => "1784287150";
@@ -22,19 +22,19 @@ class Config {
   String get supportServerId => "797736897941995540";
 
   /// support server premium role id
-  String get supportServerPremiumRoleId => "810581872773693490";
+  String get supportServerPremiumRoleId => "756720238640365575";
 
   /// encryption key
   String get encryptionKey => Privates.encryptionKey;
 
   /// api key for backend
-  String get apiKey => Privates.apiKey;
+  // String get apiKey => Privates.apiKey;
 
   /// webhook key for backend
-  String get webhookKey => Privates.webhookKey;
+  // String get webhookKey => Privates.webhookKey;
 
   /// topgg api key
-  String get topggApiKey => Privates.topGGApiKey;
+  // String get topggApiKey => Privates.topGGApiKey;
 
   /// the bot's token
   String get token =>
