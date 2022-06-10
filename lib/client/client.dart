@@ -3,7 +3,7 @@ import "package:logging/logging.dart";
 
 import "package:nyxx/nyxx.dart";
 import "package:nyxx_commands/nyxx_commands.dart";
-import "package:nyxx_sharding/nyxx_sharding.dart";
+// import "package:nyxx_sharding/nyxx_sharding.dart";
 
 /// telegram bot
 import "../telegram/telegram.dart";
@@ -87,7 +87,7 @@ class Client {
   late final SystemJobsPlugin systemJobs;
 
   /// Sharding plugin
-  late final IShardingPlugin shardingPlugin;
+  // late final IShardingPlugin shardingPlugin;
 
   // Footer text
   String footerText = "discord.gg/fishstick";
@@ -186,7 +186,7 @@ class Client {
     handleCommandsPostCall(_commands);
 
     /// setup sharding plugin
-    shardingPlugin = IShardingPlugin();
+    // shardingPlugin = IShardingPlugin();
 
     /// setup database
     database = Database(config.mongoUri);
@@ -194,23 +194,27 @@ class Client {
     /// setup discord client
     bot = NyxxFactory.createNyxxWebsocket(
       config.token,
-      GatewayIntents.allUnprivileged,
-      options: getOptions(
-        ClientOptions(
-          initialPresence: PresenceBuilder.of(
-            activity: ActivityBuilder.game("/help | $totalShards shards"),
-            status: UserStatus.online,
-          ),
-          messageCacheSize: 0,
-          guildSubscriptions: false,
-          dispatchRawShardEvent: true,
-        ),
-      ),
-    )
+      GatewayIntents.allUnprivileged)
+      // activity: ActivityBuilder.game("Claiming rewards"),
+      // status:UserStatus.online,
+      // messageCacheSize: 0,
+      // guildSubscriptions: false,
+      // options: getOptions(
+      //   ClientOptions(
+      //     initialPresence: PresenceBuilder.of(
+      //       activity: ActivityBuilder.game("/help | shards"),
+      //       status: UserStatus.online,
+      //     ),
+      //     messageCacheSize: 0,
+      //     guildSubscriptions: false,
+      //     // dispatchRawShardEvent: true,
+      //   ),
+      // ),
+    
       ..registerPlugin(CliIntegration())
       ..registerPlugin(IgnoreExceptions())
       ..registerPlugin(_commands)
-      ..registerPlugin(shardingPlugin)
+      // ..registerPlugin(shardingPlugin)
       ..registerPlugin(systemJobs);
 
     telebot = TeleBotClient(this);
@@ -239,15 +243,15 @@ class Client {
       // IGNORE
     }
 
-    if (shardIds.contains(0)) {
-      _start = DateTime.now().millisecondsSinceEpoch;
-      await telebot.connect();
-      logger.info(
-          "Connected to telegram [${(DateTime.now().millisecondsSinceEpoch - _start).toStringAsFixed(2)}ms]");
-    } else {
-      logger.info(
-          "Current process dont have shard 0, skipping telegram connection.");
-    }
+    // if (shardIds.contains(0)) {
+    //   _start = DateTime.now().millisecondsSinceEpoch;
+    //   await telebot.connect();
+    //   logger.info(
+    //       "Connected to telegram [${(DateTime.now().millisecondsSinceEpoch - _start).toStringAsFixed(2)}ms]");
+    // } else {
+    //   logger.info(
+    //       "Current process dont have shard 0, skipping telegram connection.");
+    // }
 
     return;
   }

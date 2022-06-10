@@ -1,7 +1,7 @@
 import "dart:async";
 
 import "package:nyxx/nyxx.dart";
-import "package:nyxx_sharding/nyxx_sharding.dart";
+// import "package:nyxx_sharding/nyxx_sharding.dart";
 import "package:logging/logging.dart";
 import "package:cron/cron.dart";
 
@@ -16,7 +16,7 @@ import "collect_research.dart";
 import "auto_research.dart";
 import "url_shortener.dart";
 // import "topgg.dart";
-import "stw_missions.dart";
+// import "stw_missions.dart";
 
 /// Handles all the system jobs
 class SystemJobsPlugin extends BasePlugin {
@@ -74,10 +74,10 @@ class SystemJobsPlugin extends BasePlugin {
   // late final TopGGSystemJob topGGSystemJob;
 
   /// stw missions system job
-  late final STWMissionsSystemJob stwMissionsSystemJob;
+  // late final STWMissionsSystemJob stwMissionsSystemJob;
 
   /// stw missions system job
-  late final ScheduledTask _stwMissionsSystemJobTimer;
+  // late final ScheduledTask _stwMissionsSystemJobTimer;
 
   /// Creates a new instance of [SystemJobsPlugin]
   SystemJobsPlugin(this._client);
@@ -105,7 +105,7 @@ class SystemJobsPlugin extends BasePlugin {
     logger.info("Registering topgg system job");
     // topGGSystemJob = TopGGSystemJob(_client);
     logger.info("Registering stw missions system job");
-    stwMissionsSystemJob = STWMissionsSystemJob(_client);
+    // stwMissionsSystemJob = STWMissionsSystemJob(_client);
   }
 
   /// Schedule all the system jobs
@@ -125,14 +125,14 @@ class SystemJobsPlugin extends BasePlugin {
 
       logger.info(
           "Scheduling catalog manager system job to run every ${catalogManagerSystemJob.runDuration.inHours} hours.");
-      _catalogManagerSystemJobTimer =
-          Timer.periodic(catalogManagerSystemJob.runDuration, (_) async {
-        await catalogManagerSystemJob.run();
-      });
+      // _catalogManagerSystemJobTimer =
+      //     Timer.periodic(catalogManagerSystemJob.runDuration, (_) async {
+      //   await catalogManagerSystemJob.run();
+      // });
 
-      if (!shardIds.contains(0)) {
-        return;
-      }
+      // if (!shardIds.contains(0)) {
+      //   return;
+      // }
 
       // urlShortenerSystemJob.run();
       // topGGSystemJob.run();
@@ -176,16 +176,16 @@ class SystemJobsPlugin extends BasePlugin {
         await autoResearchSystemJob.run();
       });
 
-      if (!_client.config.developmentMode) {
-        stwMissionsSystemJob.run();
-      }
+      // if (!_client.config.developmentMode) {
+      //   stwMissionsSystemJob.run();
+      // }
 
-      logger
-          .info("Scheduling stw missions system job to run daily at 0:00 UTC.");
-      _stwMissionsSystemJobTimer =
-          _cron.schedule(Schedule.parse("1 0 * * *"), () async {
-        await stwMissionsSystemJob.run();
-      });
+      // logger
+      //     .info("Scheduling stw missions system job to run daily at 0:00 UTC.");
+      // _stwMissionsSystemJobTimer =
+      //     _cron.schedule(Schedule.parse("1 0 * * *"), () async {
+      //   await stwMissionsSystemJob.run();
+      // });
     } on Exception catch (e) {
       logger.severe("Failed to start system jobs", e);
     }
@@ -199,11 +199,11 @@ class SystemJobsPlugin extends BasePlugin {
       // _updateCosmeticsCacheSystemJobTimer.cancel();
 
       logger.info("Unscheduling catalog manager system job.");
-      _catalogManagerSystemJobTimer.cancel();
+      // _catalogManagerSystemJobTimer.cancel();
 
-      if (!shardIds.contains(0)) {
-        return;
-      }
+      // if (!shardIds.contains(0)) {
+      //   return;
+      // }
 
       logger.info("Unscheduling premium role sync system job.");
       _premiumRoleSyncSystemJobTimer.cancel();
@@ -221,7 +221,7 @@ class SystemJobsPlugin extends BasePlugin {
       _autoResearchSystemJobTimer.cancel();
 
       logger.info("Unscheduling stw missions system job.");
-      await _stwMissionsSystemJobTimer.cancel();
+      // await _stwMissionsSystemJobTimer.cancel();
 
       logger.info("Closing cron manager.");
       await _cron.close();

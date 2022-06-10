@@ -13,7 +13,7 @@ final ChatCommand pingCommand = ChatCommand(
         MessageBuilder.embed(
           EmbedBuilder()
             ..description =
-                "🏓Pong! `${client.bot.shardManager.gatewayLatency.inMilliseconds}ms`"
+                "🏓Pong!"
             ..color = DiscordColor.fromHexString((await ctx.dbUser).color)
             ..footer = (EmbedFooterBuilder()..text = client.footerText)
             ..timestamp = DateTime.now(),

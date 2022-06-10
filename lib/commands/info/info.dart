@@ -19,19 +19,19 @@ final ChatCommand infoCommand = ChatCommand(
 
       var user = await ctx.dbUser;
 
-      final int totalGuilds = (await client.shardingPlugin.getCachedGuilds())
-          .fold<int>(0, (a, b) => a + b);
+      // final int totalGuilds = (await client.shardingPlugin.getCachedGuilds())
+      //     .fold<int>(0, (a, b) => a + b);
 
-      final currentRss = ((await client.shardingPlugin.getCurrentRss())
-                  .fold<int>(0, (a, b) => a + b) /
-              1024 /
-              1024)
-          .toStringAsFixed(2);
-      final maxRss = ((await client.shardingPlugin.getMaxRss())
-                  .fold<int>(0, (a, b) => a + b) /
-              1024 /
-              1024)
-          .toStringAsFixed(2);
+      // final currentRss = ((await client.shardingPlugin.getCurrentRss())
+      //             .fold<int>(0, (a, b) => a + b) /
+      //         1024 /
+      //         1024)
+      //     .toStringAsFixed(2);
+      // final maxRss = ((await client.shardingPlugin.getMaxRss())
+      //             .fold<int>(0, (a, b) => a + b) /
+      //         1024 /
+      //         1024)
+      //     .toStringAsFixed(2);
 
       await ctx.respond(
         ComponentMessageBuilder()
@@ -49,7 +49,7 @@ final ChatCommand infoCommand = ChatCommand(
               ..addField(
                 name: "Cached guilds",
                 content:
-                    "Current process - ${client.bot.guilds.length}\nAll processes - $totalGuilds",
+                    "Current process - \nAll processes - ",
                 inline: true,
               )
               ..addField(
@@ -79,13 +79,13 @@ final ChatCommand infoCommand = ChatCommand(
               )
               ..addField(
                 name: "Shard count (in current process)",
-                content: client.bot.shards,
+                // content: client.bot.shards,
                 inline: true,
               )
               ..addField(
                 name: "Memory usage (current/RSS)",
                 content:
-                    "Current process - ${getMemoryUsageString()}\nAll processes - $currentRss/$maxRss MB",
+                    "Current process - \nAll processes -  MB",
               )
               ..addField(
                 name: "Uptime (of current process)",
